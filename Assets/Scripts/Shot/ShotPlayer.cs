@@ -8,7 +8,7 @@ public class ShotPlayer : MonoBehaviour
     public GameObject explosion;
 
     //弾速
-    private float shotSpeed = 85;
+    private float shotSpeed = 150;
 
     //ダメージ量
     public readonly int damage = 200;
