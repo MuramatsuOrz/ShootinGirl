@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
 
     //破壊された時のエフェクト
     public GameObject brokeEffect;
+    //RigidBody
+    Rigidbody rb;
 
     //体力
     public int hitPoint;
@@ -29,12 +31,13 @@ public class Enemy : MonoBehaviour
     public readonly int maxHitPoint = 500;
 
     //敵の移動速度
-    private float enemySpeed = 20;
+    private float enemySpeed = 20f;
 
     //発射音
     public AudioClip shotSE;
     //オーディオソース
     AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +48,7 @@ public class Enemy : MonoBehaviour
         targetPosition = GameObject.Find("PlayerPosition");
         //体力を初期化
         hitPoint = maxHitPoint;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -57,11 +61,15 @@ public class Enemy : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition.transform.position - transform.position);
             //緩やかにそちらを向く
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+            //プレイヤーに近づく                
+            rb.velocity = transform.forward * enemySpeed;
 
-            //プレイヤーに近づいてくる
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation, Quaternion.LookRotation(targetPosition.transform.position - transform.position), Time.deltaTime);
-            transform.position += transform.forward * Time.deltaTime * enemySpeed;
+            //プレイヤーとの距離が近すぎるなら
+            if (Vector3.Distance(targetPosition.transform.position, transform.position) <= 10) {
+                //速度をゼロにする
+                rb.velocity = Vector3.zero;
+            }
+
 
             //発射間隔時間の加算
             shotInterval += Time.deltaTime;
@@ -77,6 +85,9 @@ public class Enemy : MonoBehaviour
                 //射撃音を出す
                 audioSource.PlayOneShot(shotSE);
             }
+        } else {
+            //範囲外なら動かない
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -104,4 +115,5 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
 }

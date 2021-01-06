@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class EnemyInstantiateManager : MonoBehaviour
@@ -14,6 +15,14 @@ public class EnemyInstantiateManager : MonoBehaviour
 
     //Enemy prefab
     public GameObject enemy;
+
+    //ランダムな座標を入れる変数
+    private float randX;
+    private float randY;
+    private float randZ;
+
+    //
+    RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +39,20 @@ public class EnemyInstantiateManager : MonoBehaviour
         if(timer < 0) {
             //生成する敵の数が残っているなら
             if(instantiateEnemyValue > 0) {
-                //敵をランダムな位置に生成
-                Instantiate(
-                    enemy,
-                    new Vector3(Random.Range(-50f, 50), Random.Range(7, 25f), Random.Range(-50, 50)),
-                    Quaternion.identity
-                    );
-                //生成する敵の数を減らす
-                instantiateEnemyValue--;
+                //ランダムなX,Zを生成
+                randX = Random.Range(-50f, 50f);
+                randY = Random.Range(25f, 100f);
+                randZ = Random.Range(-50f, 50f);
+
+                if(!Physics.SphereCast(new Vector3(randX,randY,randZ),4, Vector3.down, out hit, 50, LayerMask.GetMask("Player","Enemy","Stage"))) {
+                    Instantiate(
+                        enemy,
+                        new Vector3(randX,randY,randZ),
+                        Quaternion.identity
+                        );
+                    //生成する敵の数を減らす
+                    instantiateEnemyValue--;
+                }
             }
 
             //生成間隔をだんだんと短くする
