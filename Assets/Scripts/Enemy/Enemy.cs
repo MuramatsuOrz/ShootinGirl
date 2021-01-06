@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private GameObject targetPosition;
 
     //プレイヤー認識までの距離
-    private float maxDistance = 30f;
+    private float maxDistance = 75f;
 
     //破壊された時のエフェクト
     public GameObject brokeEffect;
@@ -26,11 +26,21 @@ public class Enemy : MonoBehaviour
     //体力
     public int hitPoint;
     //体力最大値
-    public readonly int maxHitPoint = 1000;
+    public readonly int maxHitPoint = 500;
+
+    //敵の移動速度
+    private float enemySpeed = 20;
+
+    //発射音
+    public AudioClip shotSE;
+    //オーディオソース
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        //オーディオソース取得
+        audioSource = GetComponent<AudioSource>();
         //プレイヤーの位置を探索
         targetPosition = GameObject.Find("PlayerPosition");
         //体力を初期化
@@ -48,8 +58,10 @@ public class Enemy : MonoBehaviour
             //緩やかにそちらを向く
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
 
-            ////プレイヤーの方へ向く
-            //transform.LookAt(targetPosition.transform);
+            //プレイヤーに近づいてくる
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation, Quaternion.LookRotation(targetPosition.transform.position - transform.position), Time.deltaTime);
+            transform.position += transform.forward * Time.deltaTime * enemySpeed;
 
             //発射間隔時間の加算
             shotInterval += Time.deltaTime;
@@ -62,6 +74,8 @@ public class Enemy : MonoBehaviour
                 );
                 //発射間隔リセット
                 shotInterval = 0;
+                //射撃音を出す
+                audioSource.PlayOneShot(shotSE);
             }
         }
     }

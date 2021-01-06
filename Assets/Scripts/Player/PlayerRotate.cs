@@ -13,7 +13,7 @@ public class PlayerRotate : MonoBehaviour
     float timer = 0;
 
     //回転速度調整用
-    private float rotateSpeed = 2;
+    private float rotateSpeed = 1;
 
     private void Start() {
         //カメラの初期方向の保存

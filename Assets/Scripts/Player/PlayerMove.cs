@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     //private float speed = 15.0f;
     [SerializeField]
     //ジャンプ速度用定数
-    private float jumpSpeed = 20.0f;
+    private float jumpSpeed = 30.0f;
     [SerializeField]
     //かかる重力
     private float gravity = 20.0f;
@@ -141,7 +141,7 @@ public class PlayerMove : MonoBehaviour
             //ブーストゲージを減少させる
             boostPoint -= 1;
             //高さ制限以下であれば上昇
-            if (transform.position.y > 100) {
+            if (transform.position.y > 200) {
                 moveDirection.y = 0;
             } else {
                 moveDirection.y += jumpSpeed * Time.deltaTime;
