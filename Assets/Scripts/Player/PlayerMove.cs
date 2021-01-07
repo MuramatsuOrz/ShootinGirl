@@ -40,6 +40,9 @@ public class PlayerMove : MonoBehaviour
         boostPoint = maxBoostPoint;
         moveSpeed = Vector3.zero;   
         isBoost = false;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
