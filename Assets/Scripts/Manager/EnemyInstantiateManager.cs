@@ -6,12 +6,14 @@ using UnityEngine;
 public class EnemyInstantiateManager : MonoBehaviour
 {
     //タイマー
-    private float timer = 3;
+    private float timer = 2;
     //敵の生成間隔
-    private float instantiateInterval = 3;
+    private float instantiateInterval = 2;
+    //敵の最小生成間隔
+    private float minInstantiateInterval = 0.3f;
 
     //生成する敵の数
-    private int instantiateEnemyValue = 50;
+    public static int instantiateEnemyValue = 10;
 
     //Enemy prefab
     public GameObject enemy;
@@ -21,13 +23,13 @@ public class EnemyInstantiateManager : MonoBehaviour
     private float randY;
     private float randZ;
 
-    //
+    //レイキャスト
     RaycastHit hit;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        instantiateEnemyValue = 50;
     }
 
     // Update is called once per frame
@@ -57,7 +59,7 @@ public class EnemyInstantiateManager : MonoBehaviour
 
             //生成間隔をだんだんと短くする
             instantiateInterval -= 0.1f;
-            instantiateInterval = Mathf.Clamp(instantiateInterval, 1.0f, float.MaxValue);
+            instantiateInterval = Mathf.Clamp(instantiateInterval, minInstantiateInterval, float.MaxValue);
 
             //生成間隔をタイマーに代入して，再度時間計測
             timer = instantiateInterval;

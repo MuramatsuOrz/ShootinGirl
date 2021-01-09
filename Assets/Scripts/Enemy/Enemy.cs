@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
             if (Vector3.Distance(targetPosition.transform.position, transform.position) <= 10) {
                 //速度をゼロにする
                 rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
 
 
@@ -88,6 +89,7 @@ public class Enemy : MonoBehaviour
         } else {
             //範囲外なら動かない
             rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 
@@ -112,6 +114,8 @@ public class Enemy : MonoBehaviour
                     transform.position,
                     transform.rotation
                     );
+                //リザルトスコアを加算
+                GameManager.score++;
             }
         }
     }

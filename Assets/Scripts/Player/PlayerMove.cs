@@ -41,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = Vector3.zero;   
         isBoost = false;
 
+        //カーソルを消して画面に固定
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -144,7 +145,7 @@ public class PlayerMove : MonoBehaviour
             //ブーストゲージを減少させる
             boostPoint -= 1;
             //高さ制限以下であれば上昇
-            if (transform.position.y > 200) {
+            if (transform.position.y > 500) {
                 moveDirection.y = 0;
             } else {
                 moveDirection.y += jumpSpeed * Time.deltaTime;

@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class TitleSystem : MonoBehaviour
 {
     //Mainシーンへ遷移する関数
+    private void Start() {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void StartGame() {
         SceneManager.LoadScene("Main");
     }

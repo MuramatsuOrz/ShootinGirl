@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerHP : MonoBehaviour
 {
-	int hitPoint;
+	public static int hitPoint;
 	int maxHitPoint = 5000;
 
 	int damage;
