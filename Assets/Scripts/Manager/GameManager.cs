@@ -19,10 +19,10 @@ public class GameManager : MonoBehaviour
     //タイマー
     float timer = 0;
 
-    //倒した敵の数を数える遠陬
+    //倒した敵の数を数える変数
     public static int score;
 
-    int clearScore;
+    int clearScore = 0;
 
     //メッセージ
     public TextMeshProUGUI startMessage;
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
                 //プレイヤーのHPがゼロでも終了
                 if(PlayerHP.hitPoint <= 0) {
                     battleStatus = BATTLE_END;
-                    winMessage.gameObject.SetActive(true);
+                    loseMessage.gameObject.SetActive(true);
                 }
                 break;
 

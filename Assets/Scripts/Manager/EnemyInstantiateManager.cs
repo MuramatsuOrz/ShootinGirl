@@ -10,10 +10,11 @@ public class EnemyInstantiateManager : MonoBehaviour
     //敵の生成間隔
     private float instantiateInterval = 2;
     //敵の最小生成間隔
-    private float minInstantiateInterval = 0.3f;
+    private float minInstantiateInterval = 1f;
 
     //生成する敵の数
     public static int instantiateEnemyValue = 10;
+    int _instantiateEnemyValue;
 
     //Enemy prefab
     public GameObject enemy;
@@ -29,7 +30,7 @@ public class EnemyInstantiateManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        instantiateEnemyValue = 50;
+        _instantiateEnemyValue = instantiateEnemyValue;
     }
 
     // Update is called once per frame
@@ -37,10 +38,11 @@ public class EnemyInstantiateManager : MonoBehaviour
     {
         timer -= Time.deltaTime;
         
+        
         //一定の時間間隔で
         if(timer < 0) {
             //生成する敵の数が残っているなら
-            if(instantiateEnemyValue > 0) {
+            if(_instantiateEnemyValue > 0) {
                 //ランダムなX,Zを生成
                 randX = Random.Range(-50f, 50f);
                 randY = Random.Range(25f, 100f);
@@ -53,7 +55,7 @@ public class EnemyInstantiateManager : MonoBehaviour
                         Quaternion.identity
                         );
                     //生成する敵の数を減らす
-                    instantiateEnemyValue--;
+                    _instantiateEnemyValue--;
                 }
             }
 
