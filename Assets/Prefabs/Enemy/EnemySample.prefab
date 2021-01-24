@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f98b7119894468dae86167fa47c539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 9145392956434380315, guid: a882fb8c08c2942e3b5a7ae37b50c59d, type: 3}
+  shot: {fileID: 4327723291224505746, guid: 9d72ff61a4291784e8c7755d191f846a, type: 3}
   shootSpot: {fileID: 5640106555630983700}
   brokeEffect: {fileID: 4063852961258233405, guid: 64f5a87e393ba49a6949220bb0997698,
     type: 3}
