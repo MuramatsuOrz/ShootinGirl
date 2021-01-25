@@ -13,9 +13,13 @@ public class ShotPlayer : MonoBehaviour
     //ダメージ量
     public readonly int damage = 200;
 
+    //Rigidbody    
+    Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
+        rb = this.GetComponent<Rigidbody>();
         //一定時間後に消滅
         Destroy(gameObject, 2.0f);
     }
@@ -24,7 +28,7 @@ public class ShotPlayer : MonoBehaviour
     void Update()
     {
         //弾を前進させる
-        transform.position += transform.forward * Time.deltaTime * shotSpeed;
+        rb.velocity = transform.forward * shotSpeed;
 
     }
 

@@ -11,6 +11,8 @@ public class LockOn : MonoBehaviour
     //ロックオン範囲
     private float targetDistance = 50;
 
+    //デフォルトカーソル
+    public Image defaultCursol;
     //ロックオンカーソル
     public Image lockOnCursol;
     //敵のHP表示UI
@@ -29,6 +31,7 @@ public class LockOn : MonoBehaviour
     {
         //ロックオンモード初期化
         isLockMode = false;
+        defaultCursol.enabled = true;
         lockOnCursol.enabled = false;
         enemyHP.SetActive(false);
     }
@@ -122,6 +125,7 @@ public class LockOn : MonoBehaviour
 
         //ロックオンカーソル，敵HPの出現を管理
         lockOnCursol.enabled = isLockMode;
+        defaultCursol.enabled = !isLockMode;
         enemyHP.SetActive(isLocked);
     }
 

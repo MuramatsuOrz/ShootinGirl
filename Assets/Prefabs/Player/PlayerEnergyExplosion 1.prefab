@@ -9547,7 +9547,7 @@ GameObject:
   - component: {fileID: 8616646443351944726}
   - component: {fileID: 6789972071231607867}
   m_Layer: 0
-  m_Name: EnergyExplosion
+  m_Name: PlayerEnergyExplosion 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9822,8 +9822,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 4
+      minScalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
