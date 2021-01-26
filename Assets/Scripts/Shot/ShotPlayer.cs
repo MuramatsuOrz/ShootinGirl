@@ -35,7 +35,7 @@ public class ShotPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collider) {
         //地形とぶつかったら
-        if(collider.gameObject.CompareTag("Objects") || collider.gameObject.CompareTag("Enemy")) {
+        if(collider.gameObject.CompareTag("Objects") || collider.gameObject.CompareTag("Ground") || collider.gameObject.CompareTag("Enemy")) {
             //消滅させる
             Destroy(gameObject);
             //爆発を生成

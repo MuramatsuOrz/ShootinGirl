@@ -31,7 +31,7 @@ public class ShotEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collider) {
         //プレイヤーとぶつかったら
-        if(collider.gameObject.CompareTag("Objects") ||collider.gameObject.CompareTag("Player")) {
+        if(collider.gameObject.CompareTag("Objects")|| collider.gameObject.CompareTag("Ground") || collider.gameObject.CompareTag("Player")) {
 
             //消滅させる
             Destroy(gameObject);

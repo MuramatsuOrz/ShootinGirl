@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -91,6 +92,20 @@ public class Enemy : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+
+        //もしHPがゼロなら
+        if (hitPoint <= 0) {
+            //自身を破壊
+            Destroy(gameObject);
+            //爆発エフェクト生成
+            Instantiate(
+                brokeEffect,
+                transform.position,
+                transform.rotation
+                );
+            //リザルトスコアを加算
+            GameManager.score++;
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -102,21 +117,15 @@ public class Enemy : MonoBehaviour
 
             //ダメージを受ける
             hitPoint -= damage;
-            //Debug.Log("HP = " + hitPoint);
+        }
+    }
 
-            //もしHPがゼロなら
-            if(hitPoint <= 0) {
-                //自身を破壊
-                Destroy(gameObject);
-                //爆発エフェクト生成
-                Instantiate(
-                    brokeEffect,
-                    transform.position,
-                    transform.rotation
-                    );
-                //リザルトスコアを加算
-                GameManager.score++;
-            }
+    //レーザ用
+    private void OnTriggerEnter(Collider collision) {
+        if (collision.gameObject.CompareTag("Laser")) {
+            int laserDamage = collision.gameObject.GetComponent<Laser>().damage;
+
+            hitPoint -= laserDamage;
         }
     }
 

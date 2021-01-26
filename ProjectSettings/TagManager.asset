@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Shot
   - ShotEnemy
+  - Laser
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - ShotEnemy
   - Enemy
   - Stage
-  - 
+  - Laser
   - 
   - 
   - 

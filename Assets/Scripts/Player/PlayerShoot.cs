@@ -6,8 +6,15 @@ public class PlayerShoot : MonoBehaviour
 {
     //弾のプレハブ
     public GameObject shot;
-    //発射位置
+    //レーザのプレハブ
+    public GameObject laser;
+    //弾発射位置
     public GameObject shootSpot;
+    //レーザー発射位置
+    public GameObject laserSpot;
+
+    //レーザーエフェクト
+    public GameObject laserEffect;
 
     //発射音
     public AudioClip shotSE;
@@ -21,6 +28,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
+        laserEffect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,6 +50,17 @@ public class PlayerShoot : MonoBehaviour
                 //発射間隔リセット
                 shotInterval = 0;
             }
+        }
+
+        if (Input.GetButton("Fire2")) {
+            Instantiate(
+                laser,                           //弾を
+                laserSpot.transform.position,   //発射位置から
+                Camera.main.transform.rotation  //カメラの向きへ
+            );
+            laserEffect.SetActive(true);
+        } else {
+            laserEffect.SetActive(false);
         }
     }
 
