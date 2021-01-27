@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using JetBrains.Annotations;
 
 //Mainシーンのゲーム状態を管理
 public class GameManager : MonoBehaviour
 {
     //状態を代入する変数
-    int battleStatus;
+    public static int battleStatus;
 
     //状態
     const int BATTLE_START = 0;

@@ -8,7 +8,7 @@ public class Laser : MonoBehaviour
     private float shotSpeed = 100;
 
     //ダメージ量
-    public readonly int damage = 50;
+    public readonly int damage = 25;
 
     //Rigidbody    
     Rigidbody rb;
@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
     void Start() {
         rb = this.GetComponent<Rigidbody>();
         //一定時間後に消滅
-        Destroy(gameObject, 4.0f);
+        Destroy(gameObject, 3.0f);
     }
 
     // Update is called once per frame

@@ -27,4 +27,4 @@ Material:
     m_Floats: []
     m_Colors:
     - Color_C33C3BE7: {r: 0, g: 7.999999, b: 2.149774, a: 1}
-    - Vector2_C998A94B: {r: 0, g: 8, b: 0, a: 0}
+    - Vector2_C998A94B: {r: 0, g: 2, b: 0, a: 0}

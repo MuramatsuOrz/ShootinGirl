@@ -21,25 +21,33 @@ public class PlayerMove : MonoBehaviour
 
     //加速度周りの調整
     const float addNormalSpeed = 1;     //通常時の加算速度
-    const float addBoostSpeed = 2;      //ブースト時の加算速度
+    const float addBoostSpeed = 3;      //ブースト時の加算速度
     private const float moveSpeedMax = 20;      //通常時の最大速度
     private const float boostSpeedMax = 40;     //ブースト時の最大速度
 
     //ブーストゲージ
     public int boostPoint;
-    int maxBoostPoint = 1000;
+    int maxBoostPoint = 1500;
 
     //ブーストゲージイメージ
     public Image boostGaugeImage;
 
     //ブースト状態の管理
     bool isBoost;
+    //ジャンプ状態の管理
+    bool isJump;
+
+    //オーディオソース(３：ブースト音)
+    AudioSource[] audioSources;
 
     void Start(){
         //ブーストゲージ，速度の初期化
         boostPoint = maxBoostPoint;
         moveSpeed = Vector3.zero;   
         isBoost = false;
+
+        //オーディオソース取得
+        audioSources = GetComponents<AudioSource>();
 
         //カーソルを消して画面に固定
         Cursor.visible = false;
@@ -64,6 +72,15 @@ public class PlayerMove : MonoBehaviour
             isBoost = false;
         }
 
+        //ブースト,ジャンプ状態なら，ブースト音をループ再生
+        if (isBoost || isJump) {
+            if (!audioSources[3].isPlaying) {
+                audioSources[3].Play();
+            }
+        }else {
+            audioSources[3].Stop();
+        }
+
         //目標速度
         Vector3 targetSpeed = Vector3.zero;
         //加算速度
@@ -77,10 +94,10 @@ public class PlayerMove : MonoBehaviour
 
             //設置しているときと空中にいるときは減速値を変える
             if (controller.isGrounded) {
-                addSpeed.x = addNormalSpeed;
+                addSpeed.x = addNormalSpeed / 4;
 
             } else {
-                addSpeed.x = addNormalSpeed / 4;
+                addSpeed.x = addNormalSpeed;
             }
                 
 
@@ -142,6 +159,7 @@ public class PlayerMove : MonoBehaviour
         //ジャンプ操作
         if (Input.GetButton("Jump") && boostPoint > 1) {
 
+            isJump = true;
             //ブーストゲージを減少させる
             boostPoint -= 1;
             //高さ制限以下であれば上昇
@@ -153,11 +171,12 @@ public class PlayerMove : MonoBehaviour
         } else {
             //ジャンプキーを離すと落下
             moveDirection.y -= gravity * Time.deltaTime;
+            isJump = false;
         }
 
         //ジャンプ，ブーストしていないなら，ゲージを回復させる
         if(!Input.GetButton("Jump") && !Input.GetButton("Boost")) {
-            boostPoint += 2;
+            boostPoint += 3;
         }
 
         //Clampで上限，下限を設定

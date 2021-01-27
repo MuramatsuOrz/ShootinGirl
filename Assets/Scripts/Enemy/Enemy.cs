@@ -105,6 +105,7 @@ public class Enemy : MonoBehaviour
                 );
             //リザルトスコアを加算
             GameManager.score++;
+            EnemyCount.count--;
         }
     }
 
