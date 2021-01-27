@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Microsoft.Win32.SafeHandles;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -162,11 +163,15 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButton("Jump") && boostPoint > 1) {
 
             isJump = true;
-            ////ブーストゲージを減少させる
-            //boostPoint -= 1;
-            //高さ制限以下であれば上昇
-            if (transform.position.y > 500) {
+
+            //ジャンプ開始時，もし落下中なら，速度リセット
+            if (moveDirection.y < 0) {
                 moveDirection.y = 0;
+            }
+
+            //高さ制限以下であれば上昇
+            if (transform.position.y > 400) {
+                moveDirection.y = jumpSpeed;
             } else {
                 moveDirection.y += jumpSpeed * Time.deltaTime;
             }

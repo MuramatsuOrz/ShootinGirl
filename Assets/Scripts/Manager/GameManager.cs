@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI startMessage;
     public TextMeshProUGUI winMessage;
     public TextMeshProUGUI loseMessage;
+    public TextMeshProUGUI pressKeyMessage;
 
     // 状態の初期化
     private void Start()
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         startMessage.gameObject.SetActive(true);
         winMessage.gameObject.SetActive(false);
         loseMessage.gameObject.SetActive(false);
+        pressKeyMessage.gameObject.SetActive(false);
 
     }
 
@@ -77,14 +79,16 @@ public class GameManager : MonoBehaviour
                 //一定時間経過で，タイトルに遷移可能にする
                 timer += Time.deltaTime;
 
-                if(timer > 3) {
+                if(timer > 5) {
+                    //戻るキーを押すメッセージ表示
+                    pressKeyMessage.gameObject.SetActive(true);
                     //シーンの動作を停止
                     Time.timeScale = 0;
 
                     if (Input.GetButton("Cancel")) {
                         SceneManager.LoadScene("Title");
 
-                        //動作再開
+                        //動作再開       
                         Time.timeScale = 1;
                     }
                 }
