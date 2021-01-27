@@ -13,13 +13,13 @@ public class Enemy : MonoBehaviour
     //発射間隔時間
     private float shotInterval = 0;
     //発射間隔最大値
-    private float shotIntervalMax = 1.0f;
+    private float shotIntervalMax = 0.5f;
 
     //プレイヤーの位置
     private GameObject targetPosition;
 
     //プレイヤー認識までの距離
-    private float maxDistance = 75f;
+    private float maxDistance = 200f;
 
     //破壊された時のエフェクト
     public GameObject brokeEffect;

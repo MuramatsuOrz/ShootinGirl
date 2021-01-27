@@ -13,7 +13,8 @@ public class PlayerRotate : MonoBehaviour
     float timer = 0;
 
     //回転速度調整用
-    private float rotateSpeed = 0.98f;
+    private float horizontalRotateSpeed = 150f;
+    private float verticalRotateSpeed = 40f;
 
     private void Start() {
         //カメラの初期方向の保存
@@ -25,7 +26,7 @@ public class PlayerRotate : MonoBehaviour
     void Update()
     {
         //プレイヤー自身を左右回転
-        transform.Rotate(0, Input.GetAxis("Horizontal2") * rotateSpeed, 0);
+        transform.Rotate(0, Input.GetAxis("Horizontal2") * Time.deltaTime * horizontalRotateSpeed, 0);
 
         //カメラの親を回転させて上下視点移動
         //カメラの親取得
@@ -52,7 +53,7 @@ public class PlayerRotate : MonoBehaviour
         cameraParent.transform.localEulerAngles = localAngle;
 
         //カメラを上下移動
-        cameraParent.transform.Rotate(Input.GetAxis("Vertical2"), 0, 0);
+        cameraParent.transform.Rotate(Input.GetAxis("Vertical2") * Time.deltaTime * verticalRotateSpeed, 0, 0);
 
         //カメラのリセット
         if(Input.GetButton("CameraReset")) {

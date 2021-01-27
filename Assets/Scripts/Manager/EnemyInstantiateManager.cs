@@ -10,10 +10,10 @@ public class EnemyInstantiateManager : MonoBehaviour
     //敵の生成間隔
     private float instantiateInterval = 2;
     //敵の最小生成間隔
-    private float minInstantiateInterval = 1f;
+    private float minInstantiateInterval = 0.5f;
 
     //生成する敵の数
-    public static int instantiateEnemyValue = 10;
+    public static int instantiateEnemyValue = 70;
     int _instantiateEnemyValue;
 
     //Enemy prefab
@@ -44,11 +44,13 @@ public class EnemyInstantiateManager : MonoBehaviour
             //生成する敵の数が残っているなら
             if(_instantiateEnemyValue > 0) {
                 //ランダムなX,Zを生成
-                randX = Random.Range(-50f, 50f);
-                randY = Random.Range(25f, 100f);
-                randZ = Random.Range(-50f, 50f);
+                randX = Random.Range(-200f, 200f);
+                randY = Random.Range(10f, 120f);
+                randZ = Random.Range(-200f, 200f);
 
-                if(!Physics.SphereCast(new Vector3(randX,randY,randZ),4, Vector3.down, out hit, 50, LayerMask.GetMask("Player","Enemy","Stage"))) {
+                //ほかのものに接触しなければ
+                if(!Physics.SphereCast(new Vector3(randX,randY,randZ),8, Vector3.down, out hit, 50, LayerMask.GetMask("Player","Enemy","Stage"))) {
+                    //敵を生成
                     Instantiate(
                         enemy,
                         new Vector3(randX,randY,randZ),

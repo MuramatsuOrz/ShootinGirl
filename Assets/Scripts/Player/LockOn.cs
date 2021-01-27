@@ -9,7 +9,7 @@ public class LockOn : MonoBehaviour
     //ロックオン対象
     GameObject target = null;
     //ロックオン範囲
-    private float targetDistance = 50;
+    private float targetDistance = 100;
 
     //デフォルトカーソル
     public Image defaultCursol;

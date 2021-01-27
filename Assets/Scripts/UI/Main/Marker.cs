@@ -41,7 +41,7 @@ public class Marker : MonoBehaviour
         //マーカーとプレイヤーの相対位置を計算
         Vector3 position = transform.position - player.transform.position;
         //3次元→2次元を考慮して,相対座標にマーカー表示
-        marker.transform.localPosition = new Vector3(position.x, position.z, 0);
+        marker.transform.localPosition = new Vector3(0.5f * position.x, 0.5f * position.z, 0);
     }
 
     //オブジェクトが消滅したら，マーカーも消滅

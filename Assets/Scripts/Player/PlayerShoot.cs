@@ -17,8 +17,8 @@ public class PlayerShoot : MonoBehaviour
     public Image powerGauge;
 
     //パワーゲージ
-    public float powerPoint;
-    public float maxPowerPoint = 5;
+    float powerPoint;
+    float maxPowerPoint = 20;
     //パワーアップ状態かどうか
     bool isPowerUped = false;
 
