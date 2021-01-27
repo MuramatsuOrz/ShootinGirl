@@ -64,9 +64,8 @@ public class PlayerMove : MonoBehaviour
             moveDirection.y = 0;
         }
 
-        //ブースト時はフラグをたてて，ブーストゲージを減少させる
+        //ブースト時はフラグをたてる
         if (Input.GetButton("Boost") && boostPoint > 1) {
-            boostPoint -= 1;
             isBoost = true;
         } else {
             isBoost = false;
@@ -74,6 +73,9 @@ public class PlayerMove : MonoBehaviour
 
         //ブースト,ジャンプ状態なら，ブースト音をループ再生
         if (isBoost || isJump) {
+            //ゲージを減らす
+            boostPoint -= 1;
+            //ブースト音をループ再生
             if (!audioSources[3].isPlaying) {
                 audioSources[3].Play();
             }
@@ -160,8 +162,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButton("Jump") && boostPoint > 1) {
 
             isJump = true;
-            //ブーストゲージを減少させる
-            boostPoint -= 1;
+            ////ブーストゲージを減少させる
+            //boostPoint -= 1;
             //高さ制限以下であれば上昇
             if (transform.position.y > 500) {
                 moveDirection.y = 0;
